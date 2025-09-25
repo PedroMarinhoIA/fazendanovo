@@ -68,21 +68,6 @@ const weightGainData = [
   { name: 'Dez', cria: 1.0, recria: 1.3, engorda: 1.0 }
 ];
 
-const revenueData = [
-  { name: 'Jan', receita: 45000, custos: 12000, lucro: 33000 },
-  { name: 'Fev', receita: 38000, custos: 11500, lucro: 26500 },
-  { name: 'Mar', receita: 42000, custos: 12200, lucro: 29800 },
-  { name: 'Abr', receita: 35000, custos: 11800, lucro: 23200 },
-  { name: 'Mai', receita: 48000, custos: 13000, lucro: 35000 },
-  { name: 'Jun', receita: 52000, custos: 12800, lucro: 39200 },
-  { name: 'Jul', receita: 58000, custos: 13500, lucro: 44500 },
-  { name: 'Ago', receita: 62000, custos: 14000, lucro: 48000 },
-  { name: 'Set', receita: 55000, custos: 13200, lucro: 41800 },
-  { name: 'Out', receita: 49000, custos: 12900, lucro: 36100 },
-  { name: 'Nov', receita: 53000, custos: 13400, lucro: 39600 },
-  { name: 'Dez', receita: 125000, custos: 15000, lucro: 110000 }
-];
-
 export const PaddockOccupancyChart = () => (
   <ResponsiveContainer width="100%" height={300}>
     <BarChart data={paddockOccupancyData}>
@@ -143,19 +128,5 @@ export const WeightGainChart = () => (
       <Area type="monotone" dataKey="recria" stackId="1" stroke="#3B82F6" fill="#3B82F6" fillOpacity={0.6} name="Recria" />
       <Area type="monotone" dataKey="engorda" stackId="1" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.6} name="Engorda" />
     </AreaChart>
-  </ResponsiveContainer>
-);
-
-export const RevenueChart = () => (
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={revenueData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip formatter={(value) => [`R$ ${value.toLocaleString()}`, '']} />
-      <Bar dataKey="receita" fill="#10B981" name="Receita" />
-      <Bar dataKey="custos" fill="#EF4444" name="Custos" />
-      <Bar dataKey="lucro" fill="#8B5CF6" name="Lucro" />
-    </BarChart>
   </ResponsiveContainer>
 );

@@ -3,7 +3,6 @@ import {
   BarChart3, 
   TrendingUp, 
   TrendingDown,
-  DollarSign,
   Beef,
   TreePine,
   Calendar,
@@ -21,15 +20,14 @@ import {
   PaddockOccupancyChart, 
   CattleGrowthChart, 
   CategoryDistributionChart, 
-  WeightGainChart, 
-  RevenueChart 
+  WeightGainChart
 } from './ReportCharts';
 
 const ReportsOverview = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('12months');
   const [selectedMetric, setSelectedMetric] = useState('all');
 
-  // KPIs principais
+  // KPIs principais (removido o financeiro)
   const kpis = [
     {
       title: 'Total de Animais',
@@ -50,16 +48,6 @@ const ReportsOverview = () => {
       color: 'text-green-600',
       bgColor: 'bg-green-50',
       description: 'dos piquetes'
-    },
-    {
-      title: 'Receita Mensal',
-      value: 'R$ 125k',
-      change: '+18%',
-      trend: 'up',
-      icon: DollarSign,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      description: 'dezembro 2024'
     },
     {
       title: 'Ganho Médio/Dia',
@@ -164,8 +152,8 @@ const ReportsOverview = () => {
         </div>
       </div>
 
-      {/* KPIs Principais */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* KPIs Principais - agora com 3 cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {kpis.map((kpi, index) => {
           const Icon = kpi.icon;
           return (
@@ -191,12 +179,11 @@ const ReportsOverview = () => {
         })}
       </div>
 
-      {/* Gráficos Principais */}
+      {/* Gráficos Principais - removida aba financeira */}
       <Tabs defaultValue="operational" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="operational">Operacional</TabsTrigger>
           <TabsTrigger value="zootechnical">Zootécnico</TabsTrigger>
-          <TabsTrigger value="financial">Financeiro</TabsTrigger>
           <TabsTrigger value="performance">Performance</TabsTrigger>
         </TabsList>
 
@@ -242,17 +229,6 @@ const ReportsOverview = () => {
               </CardContent>
             </Card>
           </div>
-        </TabsContent>
-
-        <TabsContent value="financial" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Receita vs Custos</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <RevenueChart />
-            </CardContent>
-          </Card>
         </TabsContent>
 
         <TabsContent value="performance" className="space-y-6">
