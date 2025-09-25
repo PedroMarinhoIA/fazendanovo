@@ -9,6 +9,7 @@ import {
   Bell,
   Plus
 } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -17,13 +18,16 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const menuItems = [
-    { icon: Home, label: 'Dashboard', active: true },
-    { icon: Beef, label: 'Rebanho' },
-    { icon: TreePine, label: 'Piquetes' },
-    { icon: ArrowRightLeft, label: 'Movimentações' },
-    { icon: Droplets, label: 'Sal Mineral' },
-    { icon: BarChart3, label: 'Relatórios' },
+    { icon: Home, label: 'Dashboard', path: '/' },
+    { icon: Beef, label: 'Rebanho', path: '/cattle' },
+    { icon: TreePine, label: 'Piquetes', path: '/paddocks' },
+    { icon: ArrowRightLeft, label: 'Movimentações', path: '/movements' },
+    { icon: Droplets, label: 'Sal Mineral', path: '/salt' },
+    { icon: BarChart3, label: 'Relatórios', path: '/reports' },
   ];
 
   const quickActions = [
@@ -31,6 +35,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     { icon: Plus, label: 'Registrar Nascimento', color: 'bg-green-600 hover:bg-green-700' },
     { icon: Droplets, label: 'Repor Sal', color: 'bg-orange-600 hover:bg-orange-700' },
   ];
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -47,18 +53,20 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           <div className="space-y-2">
             {menuItems.map((item, index) => {
               const Icon = item.icon;
+              const active = isActive(item.path);
               return (
                 <button
                   key={index}
+                  onClick={() => navigate(item.path)}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                    item.active
+                    active
                       ? 'bg-blue-100 text-blue-700 font-medium'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
                   }`}
                 >
                   <Icon size={20} />
                   <span>{item.label}</span>
-                  {item.label === 'Dashboard' && (
+                  {item.label === 'Dashboard' && active && (
                     <Badge variant="secondary" className="ml-auto">
                       <Bell size={12} className="mr-1" />
                       3
@@ -108,8 +116,22 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <header className="bg-white shadow-sm border-b px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">Dashboard Operacional</h2>
-              <p className="text-gray-600">Visão geral da fazenda em tempo real</p>
+              <h2 className="text-2xl font-bold text-gray-800">
+                {location.pathname === '/' && 'Dashboard Operacional'}
+                {location.pathname === '/paddocks' && 'Gestão de Piquetes'}
+                {location.pathname === '/cattle' && 'Controle do Rebanho'}
+                {location.pathname === '/movements' && 'Movimentações'}
+                {location.pathname === '/salt' && 'Sal Mineral'}
+                {location.pathname === '/reports' && 'Relatórios'}
+              </h2>
+              <p className="text-gray-600">
+                {location.pathname === '/' && 'Visão geral da fazenda em tempo real'}
+                {location.pathname === '/paddocks' && 'Controle operacional de todos os piquetes'}
+                {location.pathname === '/cattle' && 'Gestão completa do rebanho'}
+                {location.pathname === '/movements' && 'Histórico e planejamento de movimentações'}
+                {location.pathname === '/salt' && 'Controle de reposição de sal mineral'}
+                {location.pathname === '/reports' && 'Relatórios e análises operacionais'}
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="text-green-700 border-green-300">
