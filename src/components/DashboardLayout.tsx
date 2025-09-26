@@ -4,7 +4,7 @@ import {
   Beef, 
   TreePine, 
   ArrowRightLeft, 
-  Droplets, 
+  Package, 
   BarChart3,
   Bell,
   Plus
@@ -26,14 +26,14 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     { icon: Beef, label: 'Rebanho', path: '/cattle' },
     { icon: TreePine, label: 'Piquetes', path: '/paddocks' },
     { icon: ArrowRightLeft, label: 'Movimentações', path: '/movements' },
-    { icon: Droplets, label: 'Sal Mineral', path: '/salt' },
+    { icon: Package, label: 'Insumos', path: '/supplies' },
     { icon: BarChart3, label: 'Relatórios', path: '/reports' },
   ];
 
   const quickActions = [
     { icon: ArrowRightLeft, label: 'Nova Movimentação', color: 'bg-blue-600 hover:bg-blue-700' },
     { icon: Plus, label: 'Registrar Nascimento', color: 'bg-green-600 hover:bg-green-700' },
-    { icon: Droplets, label: 'Repor Sal', color: 'bg-orange-600 hover:bg-orange-700' },
+    { icon: Package, label: 'Repor Insumos', color: 'bg-orange-600 hover:bg-orange-700' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -121,7 +121,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {location.pathname === '/paddocks' && 'Gestão de Piquetes'}
                 {location.pathname === '/cattle' && 'Controle do Rebanho'}
                 {location.pathname === '/movements' && 'Movimentações'}
-                {location.pathname === '/salt' && 'Sal Mineral'}
+                {location.pathname === '/supplies' && 'Controle de Insumos'}
                 {location.pathname === '/reports' && 'Relatórios'}
               </h2>
               <p className="text-gray-600">
@@ -129,7 +129,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {location.pathname === '/paddocks' && 'Controle operacional de todos os piquetes'}
                 {location.pathname === '/cattle' && 'Gestão completa do rebanho'}
                 {location.pathname === '/movements' && 'Histórico e planejamento de movimentações'}
-                {location.pathname === '/salt' && 'Controle de reposição de sal mineral'}
+                {location.pathname === '/supplies' && 'Gestão de sal mineral e vitaminas'}
                 {location.pathname === '/reports' && 'Relatórios e análises operacionais'}
               </p>
             </div>
